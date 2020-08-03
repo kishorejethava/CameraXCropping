@@ -1,4 +1,4 @@
-package com.android.example.cameraxbasic.utils
+package com.kishorejethava.cameraxcropping.utils
 
 import android.graphics.Bitmap
 import android.graphics.Rect

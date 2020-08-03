@@ -16,31 +16,30 @@
 
 package com.kishorejethava.cameraxcropping.fragments
 
+import android.content.Intent
+import android.media.MediaScannerConnection
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.viewpager.widget.ViewPager
-import java.io.File
-import android.content.Intent
-import android.media.MediaScannerConnection
-import android.os.Build
 import android.webkit.MimeTypeMap
 import android.widget.ImageButton
+import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.FileProvider
-import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
-import com.android.example.cameraxbasic.fragments.PhotoFragment
-import com.android.example.cameraxbasic.utils.padWithDisplayCutout
-import com.android.example.cameraxbasic.utils.showImmersive
+import androidx.viewpager.widget.ViewPager
 import com.kishorejethava.cameraxcropping.BuildConfig
 import com.kishorejethava.cameraxcropping.R
-import java.util.Locale
+import com.kishorejethava.cameraxcropping.utils.padWithDisplayCutout
+import com.kishorejethava.cameraxcropping.utils.showImmersive
+import java.io.File
+import java.util.*
 
 val EXTENSION_WHITELIST = arrayOf("JPG")
 
@@ -66,7 +65,7 @@ class GalleryFragment internal constructor() : Fragment() {
         retainInstance = true
 
         // Get root directory of media from navigation arguments
-        val rootDirectory = File("args.rootDirectory")
+        val rootDirectory = File(args.rootDirectory)
 
         // Walk through all files in the root directory
         // We reverse the order of the list to present the last photos first

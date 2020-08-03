@@ -12,4 +12,7 @@
     <string name="delete_button_alt">Delete</string>
     <string name="delete_dialog">Delete current photo?</string>
     <string name="delete_title">Confirm</string>
+    <string name="square">Square</string>
+    <string name="rectangle">Rectangle</string>
+    <string name="circular">Circular</string>
 </resources>

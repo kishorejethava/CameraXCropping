@@ -7,7 +7,7 @@ import android.view.KeyEvent
 import android.widget.FrameLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import com.android.example.cameraxbasic.utils.FLAGS_FULLSCREEN
+import com.kishorejethava.cameraxcropping.utils.FLAGS_FULLSCREEN
 import java.io.File
 
 const val KEY_EVENT_ACTION = "key_event_action"

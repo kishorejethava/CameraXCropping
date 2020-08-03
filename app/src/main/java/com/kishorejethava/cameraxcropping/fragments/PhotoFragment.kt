@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.example.cameraxbasic.fragments
+package com.kishorejethava.cameraxcropping.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

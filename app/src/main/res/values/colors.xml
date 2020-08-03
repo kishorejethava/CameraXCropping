@@ -8,6 +8,6 @@
     <color name="icFocused">#DDFFFFFF</color>
     <color name="icPressed">#AAFFFFFF</color>
 
-    <color name="bouncerNotFoundBackground">#DD222222</color>
-    <color name="bouncerFoundBackground">#DD222222</color>
+    <color name="notFoundBackground">#DD222222</color>
+    <color name="foundBackground">#DD222222</color>
 </resources>

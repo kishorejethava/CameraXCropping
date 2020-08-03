@@ -53,10 +53,10 @@ class ViewFinderBackground(context: Context, attrs: AttributeSet?) : View(contex
         attributes.getColor(
             R.styleable.ViewFinderBackground_backgroundColor,
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                resources.getColor(R.color.bouncerNotFoundBackground, theme)
+                resources.getColor(R.color.notFoundBackground, theme)
             } else {
                 @Suppress("deprecation")
-                resources.getColor(R.color.bouncerNotFoundBackground)
+                resources.getColor(R.color.notFoundBackground)
             }
         )
 

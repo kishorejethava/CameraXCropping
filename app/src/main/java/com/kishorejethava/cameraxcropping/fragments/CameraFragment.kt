@@ -54,13 +54,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.Navigation
-import com.android.example.cameraxbasic.utils.*
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.kishorejethava.cameraxcropping.KEY_EVENT_ACTION
 import com.kishorejethava.cameraxcropping.KEY_EVENT_EXTRA
 import com.kishorejethava.cameraxcropping.MainActivity
 import com.kishorejethava.cameraxcropping.R
+import com.kishorejethava.cameraxcropping.utils.*
 import kotlinx.android.synthetic.main.fragment_camera.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -95,7 +95,7 @@ class CameraFragment : Fragment() {
     private var lensFacing: Int = CameraSelector.LENS_FACING_BACK
     private var preview: Preview? = null
     private var imageCapture: ImageCapture? = null
-    private var imageAnalyzer: ImageAnalysis? = null
+//    private var imageAnalyzer: ImageAnalysis? = null
     private var camera: Camera? = null
     private var cameraProvider: ProcessCameraProvider? = null
     private lateinit var viewFinderRect: Rect
@@ -133,7 +133,7 @@ class CameraFragment : Fragment() {
             if (displayId == this@CameraFragment.displayId) {
                 Log.d(TAG, "Rotation changed: ${view.display.rotation}")
                 imageCapture?.targetRotation = view.display.rotation
-                imageAnalyzer?.targetRotation = view.display.rotation
+//                imageAnalyzer?.targetRotation = view.display.rotation
             }
         } ?: Unit
     }
@@ -178,9 +178,8 @@ class CameraFragment : Fragment() {
         }
 
         // Rotate if required
-        val orientedBitmap: Bitmap = ExifUtil.rotateBitmap(uri.path!!, bitmap)
         val photoFile = createFile(outputDirectory, FILENAME, PHOTO_EXTENSION)
-        val cropped = cropImage(ExifUtil.rotateBitmap(uri.path!!, orientedBitmap), Size(view_finder.width, view_finder.height), viewFinderRect)
+        val cropped = cropImage(ExifUtil.rotateBitmap(uri.path!!, bitmap), Size(view_finder.width, view_finder.height), viewFinderRect)
         val newUri = storeImage(cropped, photoFile)
 
         // Run the operations in the view's thread
@@ -321,7 +320,7 @@ class CameraFragment : Fragment() {
                 .build()
 
         // ImageAnalysis
-        imageAnalyzer = ImageAnalysis.Builder()
+        /*imageAnalyzer = ImageAnalysis.Builder()
                 // We request aspect ratio but no resolution
                 .setTargetAspectRatio(screenAspectRatio)
                 // Set initial target rotation, we will have to call this again if rotation changes
@@ -336,7 +335,7 @@ class CameraFragment : Fragment() {
                         // instead!
                         Log.d(TAG, "Average luminosity: $luma")
                     })
-                }
+                }*/
 
         // Must unbind the use-cases before rebinding them
         cameraProvider.unbindAll()
@@ -345,7 +344,7 @@ class CameraFragment : Fragment() {
             // A variable number of use-cases can be passed here -
             // camera provides access to CameraControl & CameraInfo
             camera = cameraProvider.bindToLifecycle(
-                    this, cameraSelector, preview, imageCapture, imageAnalyzer)
+                    this, cameraSelector, preview, imageCapture)
 
             // Attach the viewfinder's surface provider to preview use case
             preview?.setSurfaceProvider(viewFinder.createSurfaceProvider())
@@ -461,7 +460,8 @@ class CameraFragment : Fragment() {
                     container.postDelayed({
                         container.foreground = ColorDrawable(Color.WHITE)
                         container.postDelayed(
-                                { container.foreground = null }, ANIMATION_FAST_MILLIS)
+                                { container.foreground = null }, ANIMATION_FAST_MILLIS
+                        )
                     }, ANIMATION_SLOW_MILLIS)
                 }
             }
@@ -523,7 +523,7 @@ class CameraFragment : Fragment() {
      * <p>All we need to do is override the function `analyze` with our desired operations. Here,
      * we compute the average luminosity of the image by looking at the Y plane of the YUV frame.
      */
-    private class LuminosityAnalyzer(listener: LumaListener? = null) : ImageAnalysis.Analyzer {
+    /*private class LuminosityAnalyzer(listener: LumaListener? = null) : ImageAnalysis.Analyzer {
         private val frameRateWindow = 8
         private val frameTimestamps = ArrayDeque<Long>(5)
         private val listeners = ArrayList<LumaListener>().apply { listener?.let { add(it) } }
@@ -531,14 +531,14 @@ class CameraFragment : Fragment() {
         var framesPerSecond: Double = -1.0
             private set
 
-        /**
+        *//**
          * Used to add listeners that will be called with each luma computed
-         */
+         *//*
         fun onFrameAnalyzed(listener: LumaListener) = listeners.add(listener)
 
-        /**
+        *//**
          * Helper extension function used to extract a byte array from an image plane buffer
-         */
+         *//*
         private fun ByteBuffer.toByteArray(): ByteArray {
             rewind()    // Rewind the buffer to zero
             val data = ByteArray(remaining())
@@ -546,7 +546,7 @@ class CameraFragment : Fragment() {
             return data // Return the byte array
         }
 
-        /**
+        *//**
          * Analyzes an image to produce a result.
          *
          * <p>The caller is responsible for ensuring this analysis method can be executed quickly
@@ -561,7 +561,7 @@ class CameraFragment : Fragment() {
          * call image.close() on received images when finished using them. Otherwise, new images
          * may not be received or the camera may stall, depending on back pressure setting.
          *
-         */
+         *//*
         override fun analyze(image: ImageProxy) {
             // If there are no listeners attached, we don't need to perform analysis
             if (listeners.isEmpty()) {
@@ -602,11 +602,11 @@ class CameraFragment : Fragment() {
 
             image.close()
         }
-    }
+    }*/
 
     companion object {
 
-        const val TAG = "CameraXBasic"
+        const val TAG = "CameraXCropping"
         private const val FILENAME = "yyyy-MM-dd-HH-mm-ss-SSS"
         private const val PHOTO_EXTENSION = ".jpg"
         private const val RATIO_4_3_VALUE = 4.0 / 3.0

@@ -54,6 +54,7 @@ dependencies {
     implementation 'androidx.camera:camera-view:1.0.0-alpha14'
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     kapt 'com.github.bumptech.glide:compiler:4.11.0'
+    implementation 'com.google.android.material:material:1.1.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

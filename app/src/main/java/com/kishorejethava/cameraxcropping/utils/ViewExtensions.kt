@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.android.example.cameraxbasic.utils
+package com.kishorejethava.cameraxcropping.utils
 
 import android.os.Build
 import android.view.DisplayCutout
